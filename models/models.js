@@ -151,14 +151,30 @@ const Order = sequelize.define("order", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  // address: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  // },
-  // phone: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  // },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  last_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  first_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  payment_method: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 User.hasOne(Basket);
@@ -208,5 +224,5 @@ module.exports = {
   DeviceInfo,
   TypeBrand,
   Order,
-  OrderDevice
+  OrderDevice,
 };

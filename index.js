@@ -17,7 +17,7 @@ app.use(express.static("uploads"));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "uploads")));
 app.get("/", (req, res) => {
-  res.send(req.body);
+  res.send("hello world!");
 });
 app.use("/api", router);
 app.use(errorHandler);

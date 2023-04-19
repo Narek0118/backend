@@ -1,12 +1,21 @@
-const { Order } = require("../models/models");
+const { Order, OrderDevice, Basket } = require("../models/models");
 
 class OrderController {
   async create(req, res) {
-    console.log(1111111, req.body);
-    const { userId, price, deviceIds } = req.body;
-    const order = await Order.create({ userId, price });
-    console.log(555234324324, order);
-    res.json(req.body);
+    const { userId, subtotal, deviceIds } = req;
+    const order = await Order.create({ userId, price: subtotal });
+
+    deviceIds.map(async (deviceId) => {
+      await OrderDevice.create({ deviceId, orderId: order.id });
+    });
+
+    await Basket.destroy({
+      where: {
+        userId,
+      },
+    });
+
+    res.json(req);
   }
 
   async getAll(req, res) {

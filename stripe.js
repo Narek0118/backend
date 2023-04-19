@@ -1,12 +1,10 @@
 const Router = require("express");
+const OrderController = require("./controllers/OrderController");
 const router = new Router();
-const stripe = require("stripe")(
-  "sk_test_51MrODGFbJ598qtQWA3zyMcQyJpmwRYW8053VaxmC7V0MIHgzSovI20EfK2FyhFpdSM10FXmgIpTokNubSWHfGWQI005Cab2yVi"
-);
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 router.post("/create-checkout-session", async (req, res) => {
-  console.log(2323324324324, req.body);
-  const { price } = req.body.cartItems;
+  const { price, userId, subtotal, deviceIds } = req.body.cartItems;
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -24,7 +22,9 @@ router.post("/create-checkout-session", async (req, res) => {
     success_url: `${process.env.DOMAIN}/checkout-success`,
     cancel_url: `${process.env.DOMAIN}/checkout`,
   });
-  console.log(33333333, session);
+  if (session) {
+    OrderController.create({ userId, subtotal, deviceIds });
+  }
   res.send({ url: session.url });
 });
 
