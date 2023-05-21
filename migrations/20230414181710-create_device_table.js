@@ -6,6 +6,14 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
+      typeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      brandId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,

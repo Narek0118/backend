@@ -1,12 +1,9 @@
-// config/config.js
-
 module.exports = {
-    development: {
-      username: "root",
-      password: "",
-      database: "online_shop",
-      host: "localhost",
-      dialect: "mysql",
-    },
-  };
-  
+  development: {
+    username: "postgres",
+    password: "111",
+    database: "online_shop",
+    host: "localhost",
+    dialect: "postgres",
+  },
+};

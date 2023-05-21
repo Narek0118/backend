@@ -1,15 +1,14 @@
 version: '3.9'
 services:
   db:
-    image: mysql:latest
-    container_name: mysql-container
+    image: postgres:latest
+    container_name: postgres-container
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_DATABASE: online_shop
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ""
+      POSTGRES_DB: online_shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ""
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5432:5432"

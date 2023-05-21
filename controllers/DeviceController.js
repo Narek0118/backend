@@ -41,9 +41,7 @@ class DeviceController {
           ],
         },
       ],
-      order: [
-        [Rating, 'id', 'DESC']
-      ]
+      order: [[Rating, "id", "DESC"]],
     });
 
     res.json(device);
@@ -55,28 +53,33 @@ class DeviceController {
     limit = limit || 9;
     let offset = page * limit - limit;
     let devices;
-    if (!brandId && !typeId) {
+    // if (!brandId && !typeId) {/
       // devices = await Device.findAndCountAll({ limit, offset });
-      devices = await Device.findAndCountAll();
-    } else if (brandId && !typeId) {
       devices = await Device.findAndCountAll({
-        where: { brandId },
-        limit,
-        offset,
+        include: [{
+          model: Rating,
+          required: false // set to false to perform a left outer join instead of an inner join
+        }]
       });
-    } else if (!brandId && typeId) {
-      devices = await Device.findAndCountAll({
-        where: { typeId },
-        limit,
-        offset,
-      });
-    } else if (brandId && typeId) {
-      devices = await Device.findAndCountAll({
-        where: { typeId, brandId },
-        limit,
-        offset,
-      });
-    }
+          // } else if (brandId && !typeId) {
+    //   devices = await Device.findAndCountAll({
+    //     where: { brandId },
+    //     limit,
+    //     offset,
+    //   });
+    // } else if (!brandId && typeId) {
+    //   devices = await Device.findAndCountAll({
+    //     where: { typeId },
+    //     limit,
+    //     offset,
+    //   });
+    // } else if (brandId && typeId) {
+    //   devices = await Device.findAndCountAll({
+    //     where: { typeId, brandId },
+    //     limit,
+    //     offset,
+    //   });
+    // }
 
     res.json(devices);
   }

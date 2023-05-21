@@ -10,6 +10,9 @@ module.exports = function (req, res, next) {
       return res.status(401).json({ message: "Unauthorized!" });
     }
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    if (!decoded) {
+      return res.status(403).json({ message: "Invalid token!" });
+    }
     req.user = decoded;
     next();
   } catch (e) {

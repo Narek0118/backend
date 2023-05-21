@@ -6,6 +6,14 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      deviceId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       rate: {
         type: Sequelize.INTEGER,
         allowNull: false,
