@@ -16,7 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use("/api", router);
-app.use(errorHandler);
+// app.use(errorHandler);
+app.get("/", (_, res) => {
+ return res.send("Hello World!");
+});
 
 const start = async () => {
   try {
